@@ -26,22 +26,21 @@ class OrderTest extends TestCase
 
         $this->assertTrue($order->process());
     }
-    
-    public function testOrderIsProcessedUsingMockery()
-    {
+
+    public function test_order_is_processed_using_mockery() {
+        //
         $gateway = Mockery::mock('PaymentGateway');
-
-        $gateway->shouldReceive('charge')
-                ->once()       
-                ->with(200)
-                ->andReturn(true);                                 
         
+        //
+        $gateway->shouldReceive('charge')->once()->with(200)->andReturn(true);
+        
+        //
         $order = new Order($gateway);
-
         $order->amount = 200;
-
         $this->assertTrue($order->process());        
-    }    
+    } 
+
+
 }
 
 
